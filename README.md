@@ -18,7 +18,7 @@
 
 Those two option will cost 0 mats as contractor perk will give you the same mat cost back. (you just need to have enough materials to craft 1 blueprint. The  49 amount its because 50 is the max amount of items you can put in the blueprint and you need room for the foundation. Other options with less items can work too, but the script will expect to scrap 50 items anyway.
 
-4 - You must be in CAMP mode in the Blueprints tab and the preview must show your blueprint as placeable (green) and your aim should be somwhere on the foundation as this will be used to scrap the foundation and store all the items at once as soon as it placed (provided your mouse or controller do not move, a controller is probably safer)
+4 - You must be in CAMP mode in the Blueprints tab and the preview must show your blueprint as placeable (green) and your aim should be somwhere on the foundation as this will be used to scrap the foundation and store all the items at once as soon as it placed (provided your mouse doesnt move, I will try to control for this in the future)
 
 ### Usage
 
