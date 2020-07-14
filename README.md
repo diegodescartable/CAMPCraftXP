@@ -32,9 +32,9 @@ Note: A log will be created in ths script's folder containing some information o
 
 ### Changelog
 
-Version 1.00
+Version 1.0-rc1
 
-- Initial release
+- Initial release candidate, still tuning timings.
 
 
 
