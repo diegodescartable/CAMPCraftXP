@@ -14,7 +14,7 @@
 **3** - You need to create a blueprint with 1 foundation and all items on top of it. Two suggestions:
 
 		A regular foundation with 49 rugs stacked
-		A ramp foundation with 49 Wind Chimes on the side
+		<strike>A ramp foundation with 49 Wind Chimes on the side</strike> (no longer recommended as it seems its currently not returning any materials when scrapping
 
 Those two option will cost 0 mats as contractor perk will give you the same mat cost back. (you just need to have enough materials to craft 1 blueprint. The  49 amount its because 50 is the max amount of items you can put in the blueprint and you need room for the foundation. Other options with less items can work too, but the script will expect to scrap 50 items anyway.
 
