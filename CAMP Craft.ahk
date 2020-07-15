@@ -147,7 +147,7 @@ StartScript() {
 		If (OnBlueprintsTab() = 1 )
 		{
 			SendInput {e Down}
-			Sleep 30
+			Sleep 40
 			SendInput {e Up}
 			Sleep 1500
 			SaveLog("Placing Blueprint")
@@ -161,29 +161,29 @@ StartScript() {
 	; 2 Go To Modify and Scrap Foundation
 	
 		SendInput {Tab Down}
-		Sleep 30
+		Sleep 40
 		SendInput {Tab Up}
-		Sleep 500
+		Sleep 1000
 		
 		If (OnBuildMode() = 0)
 		{	
 			SaveLog("Removing Foundation")
 			
 			SendInput {r Down}
-			Sleep 30
+			Sleep 40
 			SendInput {r Up}
-			Sleep 1500
+			Sleep 2000
 			
 			If (OnScrapFoundationDialog() = 1)
 			{
 				SendInput {Space Down}
-				Sleep 30
+				Sleep 40
 				SendInput {Space Up}
 				Sleep 500
 				SendInput {Tab Down}
-				Sleep 30
+				Sleep 40
 				SendInput {Tab Up}
-				Sleep 30
+				Sleep 40
 				
 				SaveLog("Foundation Scraped")	
 			}
@@ -203,7 +203,7 @@ StartScript() {
 	; 3 Go To Stored and Scrap Items
 		
 		SendInput {z Down}
-		Sleep 30
+		Sleep 40
 		SendInput {z Up}
 		Sleep 500	
 		
@@ -235,9 +235,9 @@ StartScript() {
 	; 4 Go back to Blueprints tab and start over
 		
 		SendInput {c Down}
-		Sleep 30
+		Sleep 40
 		SendInput {c Up}
-		Sleep 30	
+		Sleep 40	
 		
 		If (OnBlueprintsTab() = 1 )
 		{
