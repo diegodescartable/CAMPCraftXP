@@ -34,7 +34,7 @@ Even though Welcome Mats do not give the most XP of all CAMP items. They will ef
 
 **Tab**, **Z**, **C**, **E**, **Esc**, **Space** - Force abort script to avoid accidental scrapping since they are CAMP UI keys
 
-Note: A log will be created in ths script's folder containing some information on execution and errors
+Note: A log will be created in ths script's folder containing some information on execution and errors (still needs a lot of work but it helped during development)
 
 ### Changelog
 
