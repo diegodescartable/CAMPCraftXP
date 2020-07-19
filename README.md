@@ -17,7 +17,7 @@ Even though Welcome Mats do not give the most XP of all CAMP items. They will ef
 
 **4** - The script is currently designed to work with this blueprint as it is looking for UI elements that may change if any other items are used.
 
-**5** - Before starting the script, you must be in CAMP mode in the Blueprints tab see your blueprint as placeable (green) and your should be looking up. This is to make sure that after placed, the roof will still be on your aim and when scraped cause all the welcome mats to be store for scrapping later. Once the script starts your mouse will be blocked, in order to get your mouse back just stop the script with any of the hotkeys below
+**5** - Before starting the script, you must be in CAMP mode in the Blueprints tab see your blueprint as placeable (green) and your should be looking up. This is to make sure that after placed, the roof will still be on your aim and when scraped cause all the welcome mats to be store for scrapping later. To avoid your mouse aim from straying you can either flip your mouse or disconnect it (havent confirmed if disconnecting works well yet)
 
 **6** - Lag could cause your toon to accidentally jump when scrapping or accepting other options which could disrupt workflow. One way to prevent this is to place a foundation right on your back, you will be stuck to the foundation, confirm you cant jump before starting the script!
 
