@@ -44,6 +44,11 @@ Version 1.0-rc1
 
 - Initial release candidate.
 
+Version 1.2-RC2
+
+- Improved error checking and recovery
+- More logging with option to disable for improve performance
+
 ### Acknowledgements
 
 https://github.com/Cipencjusz for their amazing NW afk script (https://github.com/Cipencjusz/NW-farm--New) which I started to write this script from to get an idea of how to do the basics. Thanks a lot for your assitance in Discord DMs!
