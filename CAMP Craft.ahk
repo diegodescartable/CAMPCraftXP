@@ -1,18 +1,29 @@
+#SingleInstance 
 CoordMode, Pixel, Window
-global AtBlueprintsTab, AtStoredTab, Step
+global StartingBudget
+SendMode, Input
 
 ; LEFT ALT + P - START SCRIPT  - Must be on build mode in the Blueprints tab, ensure your "XP Blueprint" is pleaceable and its foundation is in your aim
 ; LEFT ALT + Z - EXIT SCRIPT
-; Tab, Z, C, E, Esc, Space - Abort script to avoid accidental scrapping since they are CAMP UI keys
-BlockInput, MouseMove
+; Tab, Z, C, E, Esc, Space - Abort script to avoid accidental scrapping since they are CAMP UI keys 
+
+
+LogEnabled := false ;~ Controls if logging is done or not (can reduce running speed but helps for troubleshooting)
 
 SwitchToF76(){
 	IfWinExist Fallout76
 	{
 		WinActivate
 		Sleep, 300
+		StartingBudget := BudgetCheck()
+
+
 	}
 }		
+
+mouseXY(x,y){
+DllCall("mouse_event", "UInt", 0x01, "UInt", x, "UInt", y)
+}
 
 OnBuildMode(){
 	XXX1 := 0
@@ -150,12 +161,23 @@ OnScrapRoofDialog(){
 }
 
 SaveLog(message){
-FileAppend,	%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec% %message% `n, CAMPCraftXPLogs.txt
+	If LogEnabled {
+		FileAppend,	%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec% %message% `n, CAMPCraftXPLogs.txt
+	}
+	
 }
 
 AbortKeys(){
 	SaveLog("CAMP Mode key manually pressed. Aborting!")
 	ExitApp
+}
+
+MouseShake(){
+	Sleep 200
+	mouseXY(0,250)
+	Sleep 200
+	mouseXY(0,-250)
+	Sleep 200
 }
 
 RoofOnAim(){
@@ -184,11 +206,23 @@ RoofOnAim(){
 	}
 	
 }
+
+BudgetCheck(){
+	PixelSearch, EmptyStartX,EmptyStartY, 1118, 129, 1245, 129, 0x2A2D2E, 60, RGB
+	
+	if ErrorLevel
+		Budget := 100
+	else
+		Budget := Round((100/127) * (EmptyStartX - 1118),0)
+	Return Budget
+}
+
 ;---------------------------------------------------------------------------
 StartScript() { 
 ;---------------------------------------------------------------------------
 	SwitchToF76()
-	sleep, 500
+	sleep, 250
+	
 		
 
 	Loop
@@ -196,33 +230,66 @@ StartScript() {
 
 	;---------------------------
 	; 1 Place Blueprint
-		Sleep 500
-		If (OnBlueprintsTab() = 1 )
-		{
-			
-			SendInput {e Down}
-			Sleep 40
-			SendInput {e Up}
-			Sleep 1500
-			SaveLog("Placing Blueprint")
-		}
-		else
+		If (OnBlueprintsTab() = 0 )
 		{
 			SaveLog("ERROR: Blueprints Tab not found!!!")
 			break
 		}	
+		
+		PlaceBP:
+		OldBudget := BudgetCheck()		
+		SaveLog("Placing Blueprint,  Current Budget is " . OldBudget . "`%")
+		
+		
+		Sleep 500
+		SendInput {e Down}
+		Sleep 150
+		SendInput {e Up}
+		Sleep 500
+		
+		Loop 50
+		{	
+			NewBudget := BudgetCheck()
+			SaveLog("Current Budget is " . NewBudget . "`%. Waiting for Blueprint to be placed..")
+			If ((NewBudget - OldBudget) > 5)
+			{				
+				SaveLog("Blueprint Placed")
+				break
+			}
+			sleep 100
+			sendInput {Tab Down}
+			Sleep 100
+			SendInput {Tab Up}
+			sleep 250
+			sendInput {Tab Down}
+			Sleep 100
+			SendInput {Tab Up}
+			sleep 250	
+		}
+		
+		NewBudget := BudgetCheck()
+		If ((NewBudget - StartingBudget) < 5)
+		{
+			SaveLog("--ERROR-- Blueprint could not be placed!! Retrying...")
+			Goto, PlaceBP
+		}
+			
+		
 	;---------------------------
 	; 2 Go To Modify and Scrap Roof
 		
 		
-		Loop 30 
-		{					
+		SaveLog("Switching to Modify Mode")
+		Loop 50 
+		{
 			sendInput {Tab Down}
-			Sleep 40
+			Sleep 100
 			SendInput {Tab Up}
-			sleep 500
+			sleep 250
+			SaveLog("Waiting for Modify mode..")		
 			If (OnBuildMode() = 0) 
 			{
+				SaveLog("Modify Mode Found")
 				break
 			}
 		}
@@ -234,66 +301,78 @@ StartScript() {
 			break
 		}
 		
-		SaveLog("Scraping Roof")
-			
-		SendInput {r Down}
-		Sleep 40
-		SendInput {r Up}
-		Sleep 500
+		Scrap:
+		OldBudget := BudgetCheck()		
+		SaveLog("Removing Roof,  Current Budget is " . OldBudget . "`%")
 		
-		Loop 30
-		{			
+		SaveLog("Opening Scrap Dialog")
+		
+		
+		SendInput {r Down}
+		Sleep 100
+		SendInput {r Up}
+		Sleep 250
 
+		Loop 100
+		{			
 			sleep 100
+			SaveLog("Waiting for Scrap dialog..")
 			If (OnScrapRoofDialog() = 1)
 			{
+				SaveLog("Scrap dialog Found")
 				break
 			}
 		}
-		Sleep 500
-		
-		If (OnScrapRoofDialog() = 0)
-		{
-			SaveLog("--ERROR-- Scrap dialog not found!!!")
-			break
-		}
-						
-		SendInput {Space Down}
-		Sleep 40
-		SendInput {Space Up}
-		
-		Loop 30
-		{			
+			
 
-			sleep 100
-			If (RoofOnAim() = 0)
-			{
+		SaveLog("Selecting scrap option")
+		SendInput {Space Down}
+		Sleep 100
+		SendInput {Space Up}
+		Sleep 250
+		
+		Loop 50
+		{	
+			NewBudget := BudgetCheck()
+			SaveLog("Current Budget is " . NewBudget . "`%. Waiting for Roof to be removed..")
+			If ((OldBudget - NewBudget) > 5)
+			{				
+				SaveLog("Roof Removed")
 				break
 			}
-		}
-		sleep 250
-		SaveLog("Roof Scraped")
-								
+			sendInput {Tab Down}
+			Sleep 100
+			SendInput {Tab Up}
+			sleep 100
 					
+		}
+		
+		NewBudget := BudgetCheck()
+		If ((NewBudget - StartingBudget) > 5)
+		{
+			SaveLog("--ERROR-- Roof could not be removed!! Retrying...")
+			Goto, Scrap
+		}
+		
+		
 	;---------------------------
 	; 3 Go To Stored and Scrap Items
 
-		SendInput {Tab Down}
-		Sleep 40
-		SendInput {Tab Up}
-		
-		Loop 30 
+		SaveLog("Switching to Build mode")
+		Loop 50 
 		{					
 			SendInput {Tab Down}
-			Sleep 40
+			Sleep 100
 			SendInput {Tab Up}
 			sleep 250
+			SaveLog("Waiting for Build mode...")
 			If (OnBuildMode() = 1)
 			{
+				SaveLog("Build mode Found")
 				break
 			}
 		}
-		Sleep 250
+		
 		
 		If (OnBuildMode() = 0) 
 		{
@@ -301,19 +380,22 @@ StartScript() {
 			break
 		}		
 		
+		SaveLog("Moving to Stored Tab")
 		SendInput {z Down}
-		Sleep 40
+		Sleep 100
 		SendInput {z Up}
 	
-		Loop 30
+		Loop 50
 		{			
 			sleep 100
+			saveLog("Waiting for Stored Tab...")
 			If (OnStoredTab() = 1 )
 			{
+				saveLog("Stored Tab Found!!!")
 				break
 			}
 		}
-		Sleep 250
+	
 		
 		If (OnStoredTab() <> 1 ) {
 		SaveLog("--ERROR-- Stored tab not found!!!")
@@ -325,36 +407,45 @@ StartScript() {
 		Loop 50
 		{
 			SendInput {r Down}
-			Sleep 50
+			Sleep 35
 			SendInput {r Up}
-			Sleep 50
+			Sleep 20
 			SendInput {Space Down}
-			Sleep 50
+			Sleep 35
 			SendInput {Space Up}
-			Sleep 50
+			Sleep 30
 		}
 
 		SaveLog("Items Scrapped")
 		
-		Sleep 1000
+		Sleep 500
 
 	;---------------------------
 	; 4 Go back to Blueprints tab and start over
 		
-		SendInput {c Down}
-		Sleep 40
-		SendInput {c Up}
-		Sleep 40	
+		SaveLog("Moving to Blueprints Tab")
 		
-		
+		Loop 50
+		{
 
-		Loop 30
-		{			
-			sleep 100
+			SendInput {c Down}
+			Sleep 100
+			SendInput {c Up}
+			Sleep 150
+			
+			SaveLog("Waiting for Blueprints Tab...")
 			If (OnBlueprintsTab() = 1 )
 			{
 				break
 			}
+			
+			;~ This is an extra tab in case the Scrap Mat dialog is still displayed
+			SendInput {Tab Down}
+			Sleep 100
+			SendInput {Tab Up}
+			Sleep 150
+			
+			
 		}
 		Sleep 250
 
@@ -380,6 +471,7 @@ StartScript() {
 
 
 !z::ExitApp
+
 $Tab::AbortKeys()
 $Z::AbortKeys()
 $C::AbortKeys()
