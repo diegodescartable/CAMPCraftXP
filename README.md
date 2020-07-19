@@ -8,6 +8,8 @@
 		bBorderless=0
 		iSize H=720
 		iSize W=1280
+		
+Important!: Make sure you are not using UI Scaling on Windows 10 (as this can throw the script off) You can check in you Windows 10 Settings > Display > Scale And Layout > Change the size of text, apps and other items  and make sure its set a 100%.
 
 **2** - To avoid material costs, you need Contractor Perk maxed (Level 18 minimum)
 
