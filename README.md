@@ -15,15 +15,17 @@
 
 Even though Welcome Mats do not give the most XP of all CAMP items. They will effectively cost 0 materials as contractor perk will give you back the same material cost. (you just need to have enough materials to craft 1 blueprint. The  49 amount its because 50 is the max amount of items you can put in the blueprint and you need room for the foundation.
 
-**4** - The script is currently design to work with this blueprint as it is looking for UI elements that may change if any other items are used.
+**4** - The script is currently designed to work with this blueprint as it is looking for UI elements that may change if any other items are used.
 
 **5** - Before starting the script, you must be in CAMP mode in the Blueprints tab see your blueprint as placeable (green) and your should be looking up. This is to make sure that after placed, the roof will still be on your aim and when scraped cause all the welcome mats to be store for scrapping later. Once the script starts your mouse will be blocked, in order to get your mouse back just stop the script with any of the hotkeys below
 
-**6** - It is my understanding that crouching stops enemy mobs in your area from spawning, during a whole day of testing my toon was not bothered at any point. You should also select a naturally calm area, like the clearing north of the Power Pylon after the road on the Whitespring train station.
+**6** - Lag could cause your toon to accidentally jump when scrapping or accepting other options which could disrupt workflow. One way to prevent this is to place a foundation right on your back, you will be stuck to the foundation, confirm you cant jump before starting the script!
 
-**7** - Tested with a toon at 42 INT without any other XP buffs during double XP this blueprint should yield around 450 XP per placement around every 16 seconds)
+**7** - It is my understanding that crouching stops enemy mobs in your area from spawning, during a whole day of testing my toon was not bothered at any point. You should also select a naturally calm area, like the clearing north of the Power Pylon after the road on the Whitespring train station.
 
-**8** - WARNING!!!!!!! A rogue combination of R > Space could cause your blueprint/s to be deleted so USE AT YOUR OWN RISK. However, be aware that during the whole process of coding and testing this script this didnt happen, not even once, but be warned in case I missed some strange scenario anyway. The most I had was the script stop at the Delete Blueprint pop up (the script checks for UI changes pretty often and will stop in any unexpected situation) if this happens, carefully stop the script with the hotkeys below and select the No option. Reset the script and yourself to the starting position and restart.
+**8** - Tested with a toon at 42 INT without any other XP buffs during double XP this blueprint should yield around 450 XP per placement around every 16 seconds)
+
+**9** - WARNING!!!!!!! A rogue combination of R > Space could cause your blueprint/s to be deleted so USE AT YOUR OWN RISK. However, be aware that during the whole process of coding and testing this script this didnt happen, not even once, but be warned in case I missed some strange scenario anyway. The most I had was the script stop at the Delete Blueprint pop up (the script checks for UI changes pretty often and will stop in any unexpected situation) if this happens, carefully stop the script with the hotkeys below and select the No option. Reset the script and yourself to the starting position and restart.
 
 
 ### Usage
