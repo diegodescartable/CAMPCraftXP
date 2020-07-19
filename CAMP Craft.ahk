@@ -1,6 +1,7 @@
 #SingleInstance 
 CoordMode, Pixel, Window
 global StartingBudget
+global LogEnabled
 SendMode, Input
 
 ; LEFT ALT + P - START SCRIPT  - Must be on build mode in the Blueprints tab, ensure your "XP Blueprint" is pleaceable and its foundation is in your aim
@@ -161,7 +162,7 @@ OnScrapRoofDialog(){
 }
 
 SaveLog(message){
-	If LogEnabled {
+	If (LogEnabled) {
 		FileAppend,	%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec% %message% `n, CAMPCraftXPLogs.txt
 	}
 	
