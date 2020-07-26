@@ -55,7 +55,7 @@ OnBuildMode(){
 
 OnBlueprintsTab(){
 	XXX1 := 0
-	PixelSearch, XXX1x, XXX1y, 349, 60, 349, 60, 0xF8D877, 60, RGB
+	PixelSearch, XXX1x, XXX1y, 349, 60, 349, 60, 0xF8D877, 60 ,RGB
 	If (ErrorLevel = 0){	
 		XXX1 := 1
 	}	
@@ -82,7 +82,7 @@ OnBlueprintsTab(){
 
 OnStoredTab(){
 	XXX1 := 0
-	PixelSearch, XXX1x, XXX1y, 230, 63, 230, 63, 0xF9DE84, 60, RGB
+	PixelSearch, XXX1x, XXX1y, 230, 63, 230, 63, 0xF9DE84, 60 ,RGB
 	If (ErrorLevel = 0){	
 		XXX1 := 1
 	}	
@@ -109,7 +109,7 @@ OnStoredTab(){
 	
 OnScrapFoundationDialog(){
 	XXX1 := 0
-	PixelSearch, XXX1x, XXX1y, 507, 433, 507, 433, 0xFAFAC7, 60, RGB
+	PixelSearch, XXX1x, XXX1y, 507, 433, 507, 433, 0xFAFAC7, 60 ,RGB
 	If (ErrorLevel = 0){	
 		XXX1 := 1
 	}	
@@ -136,7 +136,7 @@ OnScrapFoundationDialog(){
 
 OnScrapRoofDialog(){
 	XXX1 := 0
-	PixelSearch, XXX1x, XXX1y, 528, 446, 528, 446, 0xA9AA89, 60, RGB
+	PixelSearch, XXX1x, XXX1y, 528, 446, 528, 446, 0xA9AA89, 60 ,RGB
 	If (ErrorLevel = 0){	
 		XXX1 := 1
 	}	
@@ -173,48 +173,17 @@ AbortKeys(){
 	ExitApp
 }
 
-MouseShake(){
-	Sleep 200
-	mouseXY(0,250)
-	Sleep 200
-	mouseXY(0,-250)
-	Sleep 200
-}
-
-RoofOnAim(){
-	XXX1 := 0
-	PixelSearch, XXX1x, XXX1y, 1118, 201, 1118, 201, 0xF1F1C0, 60 ,RGB
-	If (ErrorLevel = 0){	
-		XXX1 := 1
-	}	
-	XXX2 := 0
-	PixelSearch, XXX2x, XXX2y, 1137, 204, 1137, 204, 0xE5E5B7, 60 ,RGB
-	If (ErrorLevel = 0)	{
-		XXX2 := 1
-	}
-	XXX3 := 0
-	PixelSearch, XXX3x, XXX3y, 1141, 227, 1141, 227, 0xF5F5C3, 60 ,RGB
-	If (ErrorLevel = 0){	
-		XXX3 := 1
-	}
-	If (XXX1 = 1 and XXX2 = 1 and XXX3 = 1)
-	{
-		return 1
-	}
-	else
-	{
-		return 0
-	}
-	
-}
-
 BudgetCheck(){
-	PixelSearch, EmptyStartX,EmptyStartY, 1118, 129, 1245, 129, 0x2A2D2E, 60, RGB
-	
-	if ErrorLevel
-		Budget := 100
-	else
-		Budget := Round((100/127) * (EmptyStartX - 1118),0)
+	PixelSearch, EmptyStartX,EmptyStartY, 1118, 129, 1245, 129, 0x222527, 60 ,RGB
+	If ErrorLevel
+	{
+		PixelSearch, EmptyStartX,EmptyStartY, 1118, 129, 1245, 129, 0x999999, 60 ,RGB
+		If ErrorLevel
+		{
+			EmptyStartX := 1245
+		}
+	}		
+	Budget := Round((100/127) * (EmptyStartX - 1118),0)
 	Return Budget
 }
 
@@ -248,7 +217,7 @@ StartScript() {
 		SendInput {e Up}
 		Sleep 500
 		
-		Loop 50
+		Loop 20
 		{	
 			NewBudget := BudgetCheck()
 			SaveLog("Current Budget is " . NewBudget . "`%. Waiting for Blueprint to be placed..")
@@ -281,7 +250,7 @@ StartScript() {
 		
 		
 		SaveLog("Switching to Modify Mode")
-		Loop 50 
+		Loop 20 
 		{
 			sendInput {Tab Down}
 			Sleep 100
@@ -332,7 +301,7 @@ StartScript() {
 		SendInput {Space Up}
 		Sleep 250
 		
-		Loop 50
+		Loop 20
 		{	
 			NewBudget := BudgetCheck()
 			SaveLog("Current Budget is " . NewBudget . "`%. Waiting for Roof to be removed..")
@@ -360,7 +329,7 @@ StartScript() {
 	; 3 Go To Stored and Scrap Items
 
 		SaveLog("Switching to Build mode")
-		Loop 50 
+		Loop 20 
 		{					
 			SendInput {Tab Down}
 			Sleep 100
@@ -386,7 +355,7 @@ StartScript() {
 		Sleep 100
 		SendInput {z Up}
 	
-		Loop 50
+		Loop 20
 		{			
 			sleep 100
 			saveLog("Waiting for Stored Tab...")
@@ -426,7 +395,7 @@ StartScript() {
 		
 		SaveLog("Moving to Blueprints Tab")
 		
-		Loop 50
+		Loop 20
 		{
 
 			SendInput {c Down}
