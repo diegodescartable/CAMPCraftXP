@@ -29,6 +29,8 @@ Even though Welcome Mats do not give the most XP of all CAMP items. They will ef
 
 **9** - WARNING!!!!!!! A rogue combination of R > Space could cause your blueprint/s to be deleted so USE AT YOUR OWN RISK. However, be aware that during the whole process of coding and testing this script this didnt happen, not even once, but be warned in case I missed some strange scenario anyway. The most I had was the script stop at the Delete Blueprint pop up (the script checks for UI changes pretty often and will stop in any unexpected situation) if this happens, carefully stop the script with the hotkeys below and select the No option. Reset the script and yourself to the starting position and restart.
 
+**10** - WARNING 2!!!!! There has been reported instances of the game crashing when placing blueprints (even without the script running) that can sometimes result in a complete camp wipe, it would seem that sometimes the game could crash when placing heavy blueprints (like the one used here) not sure on whats the caused but as far as the script goes this seems to have been somewhat mitigated with running the script with Administrator privileges. So in case the script or an underlying game bug causes this it is always recommended to run the script without any important blueprints or CAMP setup you dont wanna lose!
+
 
 ### Usage
 
@@ -50,6 +52,11 @@ Version 1.2-RC2
 
 - Improved error checking and recovery
 - More logging with option to disable for improve performance
+
+Version 1.3-RC3
+
+- Improved budget checking
+- Updated timings and retry amounts
 
 ### Acknowledgements
 
